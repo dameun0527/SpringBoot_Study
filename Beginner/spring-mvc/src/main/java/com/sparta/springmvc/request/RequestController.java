@@ -20,7 +20,7 @@ public class RequestController {
     @GetMapping("/star/{name}/age/{age}/95")
     @ResponseBody
     public String helloRequestPath(@PathVariable String name, @PathVariable int age) {
-        return String.format("Hello, @PathVariable.<br> name = %s, age = %d%", name, age);
+        return String.format("Hello, @RequestParam.<br> name = %s, age = %d", name, age);
     }
 
     // [Request sample]
