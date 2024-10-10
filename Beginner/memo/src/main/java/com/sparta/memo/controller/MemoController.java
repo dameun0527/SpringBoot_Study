@@ -17,10 +17,10 @@ import java.util.List;
 @RequestMapping("/api")
 public class MemoController {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final MemoService memoService;
 
-    public MemoController(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public MemoController(MemoService memoService) {
+        this.memoService = memoService;
     }
 
     // HTTP POST 요청을 처리하는 메소드
@@ -28,7 +28,6 @@ public class MemoController {
     // 새로운 메모를 생성하는 역할
     @PostMapping("/memos")
     public MemoResponseDto createMemo(@RequestBody MemoRequestDto requestDto) {
-        MemoService memoService = new MemoService(jdbcTemplate);
         return memoService.createMemo(requestDto);
     }
 
@@ -37,7 +36,6 @@ public class MemoController {
     // 주로 데이터 조화할 때 사용. 모든 메모를 리스트로 반환하는 역할
     @GetMapping("/memos")
     public List<MemoResponseDto> getMemos() {
-        MemoService memoService = new MemoService(jdbcTemplate);
         return memoService.getMemos();
     }
 
@@ -45,7 +43,6 @@ public class MemoController {
     // 기존 메모를 수정하는데 사용
     @PutMapping("/memos/{id}")
     public Long updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) {
-        MemoService memoService = new MemoService(jdbcTemplate);
         return memoService.updateMemo(id, requestDto);
     }
 
@@ -53,7 +50,6 @@ public class MemoController {
     // 특정 ID의 메모를 삭제하는데 사용
     @DeleteMapping("/memos/{id}")
     public Long deleteMemo(@PathVariable Long id) {
-        MemoService memoService = new MemoService(jdbcTemplate);
         return memoService.deleteMemo(id);
     }
 
